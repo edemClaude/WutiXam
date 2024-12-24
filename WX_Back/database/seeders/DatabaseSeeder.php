@@ -2,9 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cour;
+use App\Models\Lesson;
+use App\Models\Role;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Hash;
 use Illuminate\Database\Seeder;
+use phpDocumentor\Reflection\Types\This;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +18,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+
+        $this->call([
+            RoleSeeder::class,
+            CourSeeder::class,
+            ModuleSeeder::class,
+            LessonSeeder::class,
+            VideoSeeder::class
+        ]);
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Edem Claude',
+            'email' => 'edemClaude@example.com',
+            'password' => Hash::make('password'),
+            'role_id' => 1
         ]);
+
+        User::factory(10)->create();
+
     }
 }
